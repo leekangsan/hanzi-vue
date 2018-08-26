@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>汉字 / 漢字 / Hàn Zì</title>
+  <meta name="description" content="汉字 / 漢字 / Hàn Zì">
+  <link rel="stylesheet" href="hanzi.css">
+  <script src="characters.json.js"></script>
+  <script src="sentences.json.min.js"></script>
+
+  <!-- vuuuuuue -->
+  <!-- development version, includes helpful console warnings -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- production version, optimized for size and speed 
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+
+</head>
+<body>
+	<div id="app">
+	    <h1>汉字 / 漢字 / Hàn Zì</h1>
+	    <div>
+	        <input v-model="maxCharacters" class="maxCharacters" type="number" value="1000" min="50" max="1500"></input>
+	        most common characters.
+	    </div>
+	    <div>
+	    	{{ characterIndex }}
+	    </div>
+	    <div class="characters">
+	    	<div class="simplified">
+	    		{{ currentCharacter.simplified }}
+	    	</div>
+	    	<div v-if="currentCharacter.simplified !== currentCharacter.traditional" class="traditional">
+	    		/ {{ currentCharacter.traditional }}
+	    	</div>
+	    </div>
+	    <div class="sentence">
+	    	<div v-html="currentSentence.simplified" class="simplified"></div>
+	    	<div v-html="currentSentence.traditional" v-if="currentCharacter.simplified !== currentCharacter.traditional" class="traditional"></div>
+	    </div>
+	    <div v-html="currentSentence.pinyin" class="pinyinSentence"></div>
+	    <div v-html="currentSentence.english" class="englishSentence"></div>
+	    <div class="answers">
+	    	<div v-for="answer in currentCharacterAnswers">
+	    		{{ answer.pinyin }}
+	    	</div>
+	    	<div v-for="answer in currentCharacterAnswers">
+	    		{{ answer.definition }}
+	    	</div>
+	    </div>
+	    <div class="results">
+	        <div class="pinyin"></div>
+	        <div class="dash">-</div>
+	        <div class="english"></div>
+	    </div>
+	    <div class="scores">
+	        <div class="score pinyinScore">
+	          pinyin score: <div class="pinyinCorrect">0</div> / <div class="pinyinTotal">0</div>
+	        </div>
+	        <div class="score englishScore">
+	          meaning score: <div class="englishCorrect">0</div> / <div class="englishTotal">0</div>
+	        </div>
+	    </div>
+	    <div class="pastGames"></div>
+	</div>
+	<script src="hanzi.js"></script>
+</body>
+</html>
