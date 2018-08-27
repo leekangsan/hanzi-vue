@@ -22,6 +22,8 @@ var app = new Vue({
         total: 0,
         pinyinScore: 0,
         meaningScore: 0,
+        pinyinAnswer: "",
+        meaningAnswer: "",
     },
     computed: {
         characterIndex: function() {
@@ -56,15 +58,26 @@ var app = new Vue({
         },
         currentCharacterAnswers: function() {
             // initialize with correct answer
-            var answers = [this.currentCharacter.pinyin];
+            var answers = [this.currentCharacter];
 
             // add 3 wrong answers
-            for (var i = 0; i < 4; i++) {
-                answers.push(this.characters[getRandom(1, parseInt(this.maxCharacters))]);
+            for (var i = 0; i < 3; i++) {
+                answers.push(this.characters[getRandom(0, parseInt(this.maxCharacters))]);
             }
 
             return shuffle(answers);
         },
-
+        pinyinCorrect: function() {
+            if (this.pinyinAnswer === "" ) {
+                return undefined;
+            }
+            return this.pinyinAnswer === this.currentCharacter.pinyin;
+        },
+        meaningCorrect: function() {
+            if (this.meaningAnswer === "" ) {
+                return undefined;
+            }
+            return this.meaningAnswer === this.currentCharacter.definition;
+        },
     },
 })

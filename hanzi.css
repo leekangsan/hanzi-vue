@@ -1,0 +1,97 @@
+h1 {
+    font-size: 1em;
+}
+
+strong {
+    color: black;
+}
+
+.characters {
+    width: 100%;
+    text-align: center;
+    font-size: 10em;
+}
+
+.helpers {
+    width: 100%;
+    color: grey;
+    text-align: center;
+    margin: 10px;
+    font-size: 2em;
+}
+
+.sentence {
+    width: 100%;
+    color: grey;
+    text-align: center;
+    font-size: 2em;
+}
+.bold {
+    color: black;
+}
+
+.pinyinSentence{
+    width: 100%;
+    color: grey;
+    text-align: center;
+    height: 1.5em;
+    font-size: 1.5em; 
+}
+.englishSentence{
+    width: 100%;
+    color: grey;
+    text-align: center;
+    height: 1.5em;
+    font-size: 1.5em; 
+}
+
+.helpers div {
+    display: inline-block;
+}
+
+.answers {
+    width: 100%;
+    text-align: center;
+}
+
+.correct {
+    color: #4CAF50;
+}
+
+.incorrect {
+    color: red;
+}
+
+.answers button {
+    margin: 10px;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.scores {
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+}
+
+.score {
+    display: inline-block;
+    margin: 0px 50px;
+}
+
+.score div {
+    display: inline-block;
+}
+
+.pastGames {
+    display: block;
+    position: absolute;
+    top: 100px;
+}

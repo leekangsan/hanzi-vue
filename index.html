@@ -25,32 +25,45 @@
 	    <div>
 	    	{{ characterIndex }}
 	    </div>
-	    <div class="characters">
-	    	<div class="simplified">
-	    		{{ currentCharacter.simplified }}
-	    	</div>
-	    	<div v-if="currentCharacter.simplified !== currentCharacter.traditional" class="traditional">
-	    		/ {{ currentCharacter.traditional }}
-	    	</div>
+	    <div class="characters" v-if="currentCharacter.simplified !== currentCharacter.traditional">
+	    	{{ currentCharacter.simplified }} / {{ currentCharacter.traditional }}
+	    </div>
+	    <div class="characters" v-else>
+	    	{{ currentCharacter.simplified }}
 	    </div>
 	    <div class="sentence">
 	    	<div v-html="currentSentence.simplified" class="simplified"></div>
-	    	<div v-html="currentSentence.traditional" v-if="currentCharacter.simplified !== currentCharacter.traditional" class="traditional"></div>
+	    	<div 
+	    		v-html="currentSentence.traditional" 
+	    		v-if="currentCharacter.simplified !== currentCharacter.traditional" 
+	    		class="traditional"></div>
 	    </div>
-	    <div v-html="currentSentence.pinyin" class="pinyinSentence"></div>
-	    <div v-html="currentSentence.english" class="englishSentence"></div>
+	    <div 
+	    	v-if="pinyinAnswer && meaningAnswer" 
+	    	v-html="currentSentence.pinyin" 
+	    	class="pinyinSentence"></div>
+	    <div 
+	    	v-if="pinyinAnswer && meaningAnswer" 
+	    	v-html="currentSentence.english" 
+	    	class="englishSentence"></div>
 	    <div class="answers">
-	    	<div v-for="answer in currentCharacterAnswers">
-	    		{{ answer.pinyin }}
-	    	</div>
-	    	<div v-for="answer in currentCharacterAnswers">
-	    		{{ answer.definition }}
-	    	</div>
+    		<button v-if="!pinyinAnswer" v-for="answer in currentCharacterAnswers" v-on:click="pinyinAnswer = answer.pinyin">
+    			{{ answer.pinyin }}
+    		</button>
+    		<button v-if="pinyinAnswer && !meaningAnswer" v-for="answer in currentCharacterAnswers" v-on:click="meaningAnswer = answer.definition">
+    			{{ answer.definition }}
+    		</button>
 	    </div>
 	    <div class="results">
-	        <div class="pinyin"></div>
+	        <div v-if="pinyinCorrect !== undefined" 
+	        	v-bind:class="{ correct: pinyinCorrect, incorrect: !pinyinCorrect }"> 
+	        	{{ currentCharacter.pinyin }} 
+	        </div>
 	        <div class="dash">-</div>
-	        <div class="english"></div>
+	        <div v-if="meaningCorrect !== undefined"
+	        	v-bind:class="{ correct: meaningCorrect, incorrect: !meaningCorrect }"> 
+	        	{{ currentCharacter.definition }} 
+	        </div>
 	    </div>
 	    <div class="scores">
 	        <div class="score pinyinScore">
