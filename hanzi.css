@@ -54,6 +54,29 @@ strong {
     text-align: center;
 }
 
+.results {
+    width: 100%;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.results div{
+    display: inline-block;
+}
+
+.results button{
+    display: block;
+    margin: 10px auto;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    cursor: pointer;
+}
+
 .correct {
     color: #4CAF50;
 }

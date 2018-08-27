@@ -22,9 +22,6 @@
 	        <input v-model="maxCharacters" class="maxCharacters" type="number" value="1000" min="50" max="1500"></input>
 	        most common characters.
 	    </div>
-	    <div>
-	    	{{ characterIndex }}
-	    </div>
 	    <div class="characters" v-if="currentCharacter.simplified !== currentCharacter.traditional">
 	    	{{ currentCharacter.simplified }} / {{ currentCharacter.traditional }}
 	    </div>
@@ -55,6 +52,7 @@
     		</button>
 	    </div>
 	    <div class="results">
+		    <button v-if="pinyinCorrect !== undefined && meaningCorrect !== undefined" v-on:click="submitAnswer">Next</button>
 	        <div v-if="pinyinCorrect !== undefined" 
 	        	v-bind:class="{ correct: pinyinCorrect, incorrect: !pinyinCorrect }"> 
 	        	{{ currentCharacter.pinyin }} 
@@ -64,9 +62,6 @@
 	        	v-bind:class="{ correct: meaningCorrect, incorrect: !meaningCorrect }"> 
 	        	{{ currentCharacter.definition }} 
 	        </div>
-	    </div>
-	    <div v-if="pinyinCorrect !== undefined && meaningCorrect !== undefined">
-	    	<button v-on:click="submitAnswer">Next</button>
 	    </div>
 	    <div class="scores">
 	        <div class="score pinyinScore">
