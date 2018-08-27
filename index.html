@@ -65,15 +65,22 @@
 	        	{{ currentCharacter.definition }} 
 	        </div>
 	    </div>
+	    <div v-if="pinyinCorrect !== undefined && meaningCorrect !== undefined">
+	    	<button v-on:click="submitAnswer">Next</button>
+	    </div>
 	    <div class="scores">
 	        <div class="score pinyinScore">
-	          pinyin score: <div class="pinyinCorrect">0</div> / <div class="pinyinTotal">0</div>
+	          pinyin score: <div class="pinyinCorrect"> {{ pinyinScore }}</div> / <div class="pinyinTotal">{{ total }}</div>
 	        </div>
 	        <div class="score englishScore">
-	          meaning score: <div class="englishCorrect">0</div> / <div class="englishTotal">0</div>
+	          meaning score: <div class="englishCorrect"> {{ meaningScore }}</div> / <div class="englishTotal">{{ total }}</div>
 	        </div>
 	    </div>
-	    <div class="pastGames"></div>
+	    <div class="pastGames">
+	    	<div v-for="pastGame in pastGames">
+	    		{{ pastGame }}
+	    	</div>
+	    </div>
 	</div>
 	<script src="hanzi.js"></script>
 </body>

@@ -16,6 +16,7 @@ function shuffle(a) {
 var app = new Vue({
     el: '#app',
     data: {
+        currentTime: Date.now(),
         maxCharacters: 1000,
         sentences: sentences,
         characters: characters,
@@ -24,11 +25,12 @@ var app = new Vue({
         meaningScore: 0,
         pinyinAnswer: "",
         meaningAnswer: "",
+        pastGames: [],
     },
     computed: {
         characterIndex: function() {
-            // `this` points to the vm instances
-            return getRandom(0, parseInt(this.maxCharacters));
+            //hacked to update when pastGames.length changes
+            return getRandom(0, parseInt(this.maxCharacters) + this.pastGames.length - this.pastGames.length);
         },
         currentCharacter: function() {
             return this.characters[this.characterIndex];
@@ -78,6 +80,22 @@ var app = new Vue({
                 return undefined;
             }
             return this.meaningAnswer === this.currentCharacter.definition;
+        },
+    },
+    methods: {
+        submitAnswer: function(e) {
+            if (this.pinyinCorrect) {
+                this.pinyinScore++;
+            }
+            if (this.meaningCorrect) {
+                this.meaningScore++;
+            }
+            this.total++;
+            this.pinyinAnswer = "";
+            this.meaningAnswer = "";
+
+            var gameString = this.currentCharacter.simplified + "/" + this.currentCharacter.traditional + " " + this.currentCharacter.pinyin + " - " + this.currentCharacter.definition;
+            this.pastGames.push(gameString);
         },
     },
 })
